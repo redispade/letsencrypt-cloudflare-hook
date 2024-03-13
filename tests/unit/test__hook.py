@@ -45,7 +45,7 @@ class TestRequestCallers(TestBase):
 
     def setUp(self):
         super(TestRequestCallers, self).setUp()
-        self.matcher = re.compile(r'^https://api.cloudflare.com/client/v4/')
+        self.matcher = re.compile(r'^https://api\.cloudflare\.com/client/v4/')
 
     def _validate_requests_calls(self, mock_request, expected_data_list):
         """Helper function to check values of calls to requests"""
