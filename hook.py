@@ -1,15 +1,5 @@
 #!/usr/bin/env python3
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-from builtins import str
-
-from future import standard_library
-standard_library.install_aliases()
-
 import dns.exception
 import dns.resolver
 import logging
@@ -19,16 +9,6 @@ import sys
 import time
 
 from tld import get_fld
-
-# Enable verified HTTPS requests on older Pythons
-# http://urllib3.readthedocs.org/en/latest/security.html
-if sys.version_info[0] == 2:
-    try:
-        requests.packages.urllib3.contrib.pyopenssl.inject_into_urllib3()
-    except AttributeError:
-        # see https://github.com/certbot/certbot/issues/1883
-        import urllib3.contrib.pyopenssl
-        urllib3.contrib.pyopenssl.inject_into_urllib3()
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.StreamHandler(sys.stdout))
