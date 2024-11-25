@@ -14,8 +14,7 @@ from six.moves.urllib import parse as urlparse
 import testtools
 
 # Setup dummy environment variables so 'hook' can be imported
-os.environ['CF_EMAIL'] = "email@example'com"
-os.environ['CF_KEY'] = "a_cloudflare_example_key"
+os.environ['CF_API_TOKEN'] = "a_cloudflare_api_token"
 
 import hook  # noqa
 
@@ -31,8 +30,7 @@ class TestBase(testtools.TestCase):
         super(TestBase, self).setUp()
         self.expected_headers = {
             'Content-Type': 'application/json',
-            'X-Auth-Email': "email@example'com",
-            'X-Auth-Key': 'a_cloudflare_example_key',
+            'Authorization': 'Bearer a_cloudflare_api_token',
         }
 
 

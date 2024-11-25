@@ -28,19 +28,19 @@ $ pip3 install -r hooks/cloudflare/requirements.txt
 
 ### Configuration
 
-Your account's CloudFlare email and API key are expected to be in the environment, so make sure to:
+An API token from your CloudFlare account is expected to be in the environment, so make sure to:
 
 ```
-$ export CF_EMAIL='user@example.com'
-$ export CF_KEY='K9uX2HyUjeWg5AhAb'
+$ export CF_API_TOKEN='ABLQcziApPVRAEjXpa9bzXcHySpzja24zcTOzkV7'
 ```
 
-You can supply multiple account credentials by separating them with one or more spaces.  Accounts will be tried in the order given, until one is found that serves the relevant domain.
-Leading, trailing, and extra spaces are ignored, so you can vertically align credential pairs for easy reading:
+API tokens need the `Zone.Zone` and `Zone.DNS` permissions. You can restrict them by source IP and for specific zones.
+
+You can supply multiple API tokens credentials by separating them with one or more spaces.  Tokens will be tried in the order given, until one is found that serves the relevant domain.
+Leading, trailing, and extra spaces are ignored.
 
 ```
-$ export CF_EMAIL='user1@example.com    user2@somewhere.com'
-$ export CF_KEY='  K9uX2HyUjeWg5AhAtreb fdsfjhFdaKls45354kHJ9hsj'
+$ export CF_API_TOKEN='ABLQcziApPVRAEjXpa9bzXcHySpzja24zcTOzkV7 GingohChi0eithaigaushiuHudaef3ag6eef1cah'
 ```
 
 Optionally, you can specify the DNS servers to be used for propagation checking via the `CF_DNS_SERVERS` environment variable (props [bennettp123](https://github.com/bennettp123)):
@@ -64,8 +64,7 @@ $ export CF_DEBUG='true'
 Alternatively, these statements can be placed in `dehydrated/config`, which is automatically sourced by `dehydrated` on startup:
 
 ```
-echo "export CF_EMAIL=user@example.com" >> config
-echo "export CF_KEY=K9uX2HyUjeWg5AhAb" >> config
+echo "export CF_API_TOKEN=ABLQcziApPVRAEjXpa9bzXcHySpzja24zcTOzkV7" >> config
 echo "export CF_DEBUG=true" >> config
 ```
 
@@ -123,13 +122,12 @@ $ (dehydrated_env) pip3 install -r hooks/cloudflare/requirements.txt
 ```
 
 ### Usage with a bash script
-You can take a shortcut by creating a bash script (such as `domaincert.sh` in `~/cert_workspace`) as following to generate your certificate quickly since you need to regenerate your certificates once every 90 days. Replace CF_EMAIL (your Cloudflare email), CF_KEY (your Cloudflare API Key), and DOMAIN variables with your own info. The following assumes that the bash script is stored where you created the git clone folder for dehydrated to reduce the chances of accidentally checking in the bash script into a git repo because it is a good security practice not to store credentials in git repos.
+You can take a shortcut by creating a bash script (such as `domaincert.sh` in `~/cert_workspace`) as following to generate your certificate quickly since you need to regenerate your certificates once every 90 days. Replace `CF_API_TOKEN` (your Cloudflare API token), and `DOMAIN` variables with your own info. The following assumes that the bash script is stored where you created the git clone folder for dehydrated to reduce the chances of accidentally checking in the bash script into a git repo because it is a good security practice not to store credentials in git repos.
 
 ```
 #!/bin/bash
 
-export CF_EMAIL='user@example.com'
-export CF_KEY='K9uX2HyUjeWg5AhAb'
+export CF_API_TOKEN='ABLQcziApPVRAEjXpa9bzXcHySpzja24zcTOzkV7'
 export DOMAIN='my.domain.com'
 
 export CF_DNS_SERVERS='8.8.8.8 8.8.4.4'
