@@ -20,8 +20,8 @@ else:
 
 try:
     CF_HEADERS = [{
-        'Authorization': f'Bearer {b}'
-        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {b}',
+        'Content-Type': 'application/json'
     } for b in os.environ['CF_API_TOKEN'].split() ]
 except KeyError:
     logger.error(" + Unable to locate Cloudflare API token (CF_API_TOKEN) in environment!")
